@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app = "ShoppingListCheckOff">
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="styles/bootstrap.min.css">
+     <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style> -->
+  </head>
+  <body>
+    <div ng-controller = 'ToBuyController as toBuy'>
+      <h1>To Buy</h1>
+      <ol>
+        <li ng-repeat="item in toBuy.toBuyItems">
+          Buy {{item.quantity}} of {{item.name}}
+          <button ng-click="toBuy.boughtItem($index);">Bought</button>
+        </li>
+      </ol>
+      <div ng-if="toBuy.errorMessage" class="error">Error: {{toBuy.errorMessage}}</div>
+    </div>
+    <div ng-controller = 'AlreadyBoughtController as bought'>
+      <h1>Already Bought</h1>
+      <ol>
+        <li ng-repeat="item in bought.boughtItems">
+          Bought {{item.quantity}} of {{item.name}}
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>
