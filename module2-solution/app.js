@@ -24,6 +24,13 @@
   function AlreadyBoughtController(ShoppingListCheckOffService){
     var bought = this;
     bought.boughtItems = ShoppingListCheckOffService.getBoughtItems();
+    console.log("boughtItems length : ", bought.boughtItems.length);
+
+    if(bought.boughtItems.length === 0){
+      bought.errorMessage = true;
+    }else{
+      bought.errorMessage = false;
+    }
   }
 
   function ShoppingListCheckOffService(){
@@ -32,11 +39,7 @@
     var toBuyItems = [{name: "cookies", quantity: "10 bags"}, {name: "coke", quantity: "10 bottles"}];
     var boughtItems = [];
     service.getToBuyItems = function(){
-      if(toBuyItems.length > 0){
         return toBuyItems;
-      }else{
-        throw new Error("To Buy List is Empty");
-      }
     };
 
     service.getBoughtItems = function(){

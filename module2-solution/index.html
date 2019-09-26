@@ -34,7 +34,6 @@
           <button ng-click="toBuy.boughtItem($index);">Bought</button>
         </li>
       </ol>
-      <div ng-if="toBuy.errorMessage" class="error">Error: {{toBuy.errorMessage}}</div>
     </div>
     <div ng-controller = 'AlreadyBoughtController as bought'>
       <h1>Already Bought</h1>
@@ -42,6 +41,7 @@
         <li ng-repeat="item in bought.boughtItems">
           Bought {{item.quantity}} of {{item.name}}
         </li>
+        <div ng-if="bought.errorMessage">Nothing yet bought</div>
       </ol>
     </div>
   </body>
