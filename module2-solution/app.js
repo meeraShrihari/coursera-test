@@ -25,8 +25,11 @@ var x=0;
   function ShoppingListCheckOffService(){
     var service = this;
     var toBuyItems = [{name: "cookies", quantity: "10 bags"},
-                      {name: "coke", quantity: "10 bottles"},
-                      {name: "pizza", quantity: "5 bags"}];
+                      {name: "coke", quantity: "5 bottles"},
+                      {name: "pizza", quantity: "5 bags"},
+                      {name: "chips", quantity: "10 bags"},
+                      {name: "juice", quantity: "5 bottles"}
+                    ];
     var boughtItems = [];
     var boughtItemsLength = boughtItems.length;
     service.getToBuyItems = function(){
