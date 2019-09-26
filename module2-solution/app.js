@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-
+var x=0;
   angular.module('ShoppingListCheckOff', [])
   .controller('ToBuyController', ToBuyController)
   .controller('AlreadyBoughtController', AlreadyBoughtController)
@@ -9,12 +9,7 @@
   ToBuyController.$inject = ['ShoppingListCheckOffService'];
   function ToBuyController(ShoppingListCheckOffService){
     var toBuy = this;
-    try{
-      toBuy.toBuyItems = ShoppingListCheckOffService.getToBuyItems();
-    } catch (error) {
-      toBuy.errorMessage = error.message;
-      console.log(toBuy.errorMessage);
-    }
+    toBuy.toBuyItems = ShoppingListCheckOffService.getToBuyItems();
     toBuy.boughtItem = function (itemIndex){
     ShoppingListCheckOffService.shiftFromToBuyToBought(itemIndex);
     };
@@ -24,20 +19,16 @@
   function AlreadyBoughtController(ShoppingListCheckOffService){
     var bought = this;
     bought.boughtItems = ShoppingListCheckOffService.getBoughtItems();
-    console.log("boughtItems length : ", bought.boughtItems.length);
-
-    if(bought.boughtItems.length === 0){
-      bought.errorMessage = true;
-    }else{
-      bought.errorMessage = false;
-    }
+    bought.length = bought.boughtItems.length;
   }
 
   function ShoppingListCheckOffService(){
     var service = this;
-
-    var toBuyItems = [{name: "cookies", quantity: "10 bags"}, {name: "coke", quantity: "10 bottles"}];
+    var toBuyItems = [{name: "cookies", quantity: "10 bags"},
+                      {name: "coke", quantity: "10 bottles"},
+                      {name: "pizza", quantity: "5 bags"}];
     var boughtItems = [];
+    var boughtItemsLength = boughtItems.length;
     service.getToBuyItems = function(){
         return toBuyItems;
     };
@@ -46,8 +37,12 @@
       return boughtItems;
     };
 
+    service.getBoughtItemsLength = function(){
+      return boughtItems.length;
+    };
     service.shiftFromToBuyToBought = function(itemIndex){
         boughtItems.push((toBuyItems.splice(itemIndex, 1))[0]);
+        boughtItemsLength = boughtItems.length;
     }
   }
 

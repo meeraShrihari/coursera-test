@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html ng-app = "ShoppingListCheckOff">
   <head>
+    <title>Shopping List Check Off</title>
     <meta charset="utf-8">
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
      <style>
       .emptyMessage {
         font-weight: bold;
@@ -23,26 +24,41 @@
       button > span {
         color: green;
       }
-    </style> -->
+      h1 {
+        font-weight: bold;
+        color: Magenta;
+      }
+      h3 {
+        font-weight: bold;
+        color: #158;
+      }
+    </style>
   </head>
   <body>
-    <div ng-controller = 'ToBuyController as toBuy'>
-      <h1>To Buy</h1>
+    <div class="container">
+    <h1>Shopping List Check Off</h1>
+    <div class="row">
+    <div ng-controller = 'ToBuyController as toBuy' class="col-md-6">
+      <h3>To Buy</h3>
       <ol>
         <li ng-repeat="item in toBuy.toBuyItems">
           Buy {{item.quantity}} of {{item.name}}
-          <button ng-click="toBuy.boughtItem($index);">Bought</button>
+          <button ng-click="toBuy.boughtItem($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>Bought</button>
         </li>
       </ol>
+      <div ng-if="toBuy.toBuyItems.length === 0" class="emptyMessage">Everything is bought</div>
     </div>
-    <div ng-controller = 'AlreadyBoughtController as bought'>
-      <h1>Already Bought</h1>
+    <div ng-controller = 'AlreadyBoughtController as bought' class="col-md-6">
+      <h3>Already Bought</h3>
       <ol>
         <li ng-repeat="item in bought.boughtItems">
           Bought {{item.quantity}} of {{item.name}}
         </li>
-        <div ng-if="bought.errorMessage">Nothing yet bought</div>
       </ol>
+      <div ng-if="bought.boughtItems.length === 0" class="emptyMessage">Nothing yet bought</div>
+
     </div>
+  </div>
+  </div>
   </body>
 </html>
